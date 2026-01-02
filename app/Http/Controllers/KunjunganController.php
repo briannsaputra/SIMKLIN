@@ -14,7 +14,7 @@ class KunjunganController extends Controller
     {
         $search = $request->search;
 
-        $kunjungans = Kunjungan::with(['pasien', 'dokter'])
+        $kunjungans = Kunjungan::with(['pasien', 'dokter.poli'])
             ->when($search, function ($query) use ($search) {
                 $query->whereHas('pasien', function ($q) use ($search) {
                     $q->where('nama', 'like', "%{$search}%")
@@ -121,7 +121,7 @@ class KunjunganController extends Controller
 
     public function show(Kunjungan $kunjungan)
     {
-        $kunjungan->load(['pasien', 'dokter']);
+        $kunjungan->load(['pasien', 'dokter.poli']);
 
         return Inertia::render('Kunjungan/kunjungan-detail', [
             'kunjungan' => $kunjungan,

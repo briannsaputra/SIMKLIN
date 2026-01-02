@@ -67,7 +67,7 @@
                     <div class="space-y-3">
                         <div>
                             <p class="text-gray-900 font-bold italic">{{ kunjungan.dokter.nama_dokter }}</p>
-                            <p class="text-sm text-emerald-600 font-medium">{{ kunjungan.dokter.spesialis }}</p>
+                            <p class="text-sm text-emerald-600 font-medium">{{ kunjungan.dokter?.poli?.nama_poli ?? '-' }}</p>
                         </div>
                         <div class="flex items-center text-sm text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

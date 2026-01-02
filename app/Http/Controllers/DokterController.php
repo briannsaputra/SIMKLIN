@@ -12,7 +12,7 @@ class DokterController extends Controller
 {
     public function index()
     {
-        $dokters = Dokter::all()->map(function ($dokters) {
+        $dokters = Dokter::with('poli')->get()->map(function ($dokters) {
             $dokters->image_url = $dokters->image ? asset('storage/' . $dokters->image) : null;
             return $dokters;
         });
@@ -30,7 +30,6 @@ class DokterController extends Controller
         $request->validate([
             'nama_dokter' => 'required',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'spesialis' => 'required',
             'no_hp' => 'required',
             'poli_id' => 'required|exists:polis,id',
         ]);
@@ -45,7 +44,6 @@ class DokterController extends Controller
             Dokter::create([
                 'nama_dokter' => $request->nama_dokter,
                 'image' => $imagePath,
-                'spesialis' => $request->spesialis,
                 'no_hp' => $request->no_hp,
                 'poli_id' => $request->poli_id,
             ]);
@@ -61,7 +59,6 @@ class DokterController extends Controller
         $request->validate([
             'nama_dokter' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
-            'spesialis' => 'required|string|max:255',
             'no_hp' => 'required|string|max:15',
             'poli_id' => 'required|exists:polis,id',
         ]);
