@@ -68,6 +68,13 @@
                             </Link>
                         </div>
                         <div class="p-2">
+                            <Link :href="$route('jadwal.home')"
+                                class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#064e88] hover:text-white transition border-b border-[#064e88]">
+                            <UserGroupIcon class="w-5 h-5" />
+                            <span>Jadwal Dokter</span>
+                            </Link>
+                        </div>
+                        <div class="p-2">
                             <Link :href="$route('poli.home')"
                                 class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#064e88] hover:text-white transition border-b border-[#064e88]">
                             <BuildingOffice2Icon class="w-5 h-5" />

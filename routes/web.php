@@ -4,9 +4,11 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\AntrianController;
+use App\Http\Controllers\JadwalDokterController;
 use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PoliController;
+use App\Models\JadwalDokter;
 use App\Models\Kunjungan;
 use App\Models\Pasien;
 
@@ -42,3 +44,5 @@ Route::get('/dokter/poli', [PoliController::class, 'index'])->name('poli.home');
 Route::post('/dokter/poli/store', [PoliController::class, 'store'])->name('poli.store');
 Route::put('/dokter/poli/update/{poli}', [PoliController::class, 'update'])->name('poli.update');
 Route::delete('/dokter/poli/delete/{poli}', [PoliController::class, 'destroy'])->name('poli.destroy');
+
+Route::get('/dokter/jadwal', [JadwalDokterController::class, 'index'])->name('jadwal.home');
