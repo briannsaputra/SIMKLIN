@@ -312,7 +312,7 @@
                                                             d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 10.59V7a1 1 0 10-2 0v6a1 1 0 00.293.707l4 4a1 1 0 001.414-1.414L13 12.59z" />
                                                     </svg>
                                                 </span>
-                                                <input type="time"  v-model="form.jam_selesai"
+                                                <input type="time" v-model="form.jam_selesai"
                                                     class="w-full bg-gray-50 border-b-2 border-gray-300 group-hover:border-[#064e88] focus:outline-none focus:ring-0 focus:border-[#064e88] px-3 py-2 pl-10 text-sm shadow-sm transition duration-300 rounded-md"
                                                     required />
                                             </div>
@@ -382,6 +382,222 @@
             </div>
         </div>
     </transition>
+    <!-- Struktur Modal Edit -->
+    <transition enter-active-class="ease-out duration-300"
+        enter-from-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        enter-to-class="opacity-100 translate-y-0 sm:scale-100" leave-active-class="ease-in duration-200"
+        leave-from-class="opacity-100 translate-y-0 sm:scale-100"
+        leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+        <div v-if="isOpenEdit" class="fixed inset-0 z-50 overflow-y-auto">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <!-- Penipu untuk memusatkan konten modal -->
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+                <!-- Konten Utama Modal -->
+                <div
+                    class="inline-block align-bottom bg-white rounded-xl text-left overflow-hidden shadow-2xl transform transition-all my-8 w-[90%] max-w-sm sm:align-middle sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl border-t-4 border-[#064e88]">
+                    <!-- Header Modal -->
+                    <div class="bg-blue-100 p-6 sm:p-7 flex justify-between items-center">
+                        <h3 class="text-lg leading-6 font-bold text-[#064e88]" id="modal-title">
+                            Edit Data Pasien
+                        </h3>
+                        <button @click="isOpenEdit = false" class="text-[#053c66] hover:text-[#064e88] transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <form @submit.prevent="submitUpdate">
+                            <div class="sm:flex sm:items-start">
+                                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="group relative mb-2">
+                                            <label
+                                                class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 group-focus-within:text-[#064e88]">
+                                                Nama Dokter
+                                            </label>
+                                            <div class="flex items-center relative">
+                                                <span
+                                                    class="absolute left-0 pl-3 text-gray-400 group-focus-within:text-[#064e88]">
+                                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24" fill="currentColor">
+                                                        <path d="M12 3a4.5 4.5 0 100 9 4.5 4.5 0 000-9z" />
+                                                        <path d="M4.5 21a7.5 7.5 0 0115 0h-15z" />
+                                                    </svg>
+                                                </span>
+                                                <select v-model="formEdit.dokter_id"
+                                                    class="w-full bg-gray-50 border-b-2 border-gray-300 focus:border-[#064e88] px-3 py-2 pl-10 text-sm rounded-md">
+                                                    <option value="" disabled>
+                                                        Pilih Dokter
+                                                    </option>
+                                                    <option v-for="dokter in dokterList" :key="dokter.id"
+                                                        :value="dokter.id">
+                                                        {{ dokter.nama_dokter }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div v-if="formEdit.errors.dokter_id"
+                                                class="text-red-500 text-xs mt-1 pl-1">
+                                                {{ formEdit.errors.dokter_id }}
+                                            </div>
+                                        </div>
+                                        <div class="group relative mb-2">
+                                            <label
+                                                class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 group-focus-within:text-[#064e88]">
+                                                Pilih Hari
+                                            </label>
+                                            <div class="flex items-center relative">
+                                                <span
+                                                    class="absolute left-0 pl-3 text-gray-400 group-focus-within:text-[#064e88]">
+                                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20" fill="currentColor">
+                                                        <path
+                                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v9a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zM4 8h12v7H4V8z" />
+                                                    </svg>
+                                                </span>
+                                                <select v-model="formEdit.hari"
+                                                    class="w-full bg-gray-50 border-b-2 border-gray-300 group-hover:border-[#064e88] focus:outline-none focus:ring-0 focus:border-[#064e88] px-3 py-2 pl-10 text-sm shadow-sm transition duration-300 rounded-md">
+                                                    <option value="" disabled>
+                                                        Pilih Hari
+                                                    </option>
+                                                    <option value="Senin">
+                                                        Senin
+                                                    </option>
+                                                    <option value="Selasa">
+                                                        Selasa
+                                                    </option>
+                                                    <option value="Rabu">
+                                                        Rabu
+                                                    </option>
+                                                    <option value="Kamis">
+                                                        Kamis
+                                                    </option>
+                                                    <option value="Jumat">
+                                                        Jumat
+                                                    </option>
+                                                    <option value="Sabtu">
+                                                        Sabtu
+                                                    </option>
+                                                    <option value="Minggu">
+                                                        Minggu
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div v-if="formEdit.errors.hari" class="text-red-500 text-xs mt-1 pl-1">
+                                                {{ formEdit.errors.hari }}
+                                            </div>
+                                        </div>
+                                        <div class="group relative mb-2">
+                                            <label
+                                                class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 group-focus-within:text-[#064e88]">
+                                                Jam Mulai
+                                            </label>
+                                            <div class="flex items-center relative">
+                                                <span
+                                                    class="absolute left-0 pl-3 text-gray-400 group-focus-within:text-[#064e88]">
+                                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24" fill="currentColor">
+                                                        <path
+                                                            d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 10.59V7a1 1 0 10-2 0v6a1 1 0 00.293.707l4 4a1 1 0 001.414-1.414L13 12.59z" />
+                                                    </svg>
+                                                </span>
+                                                <input type="time" v-model="formEdit.jam_mulai"
+                                                    class="w-full bg-gray-50 border-b-2 border-gray-300 group-hover:border-[#064e88] focus:outline-none focus:ring-0 focus:border-[#064e88] px-3 py-2 pl-10 text-sm shadow-sm transition duration-300 rounded-md"
+                                                    required />
+                                            </div>
+                                            <div v-if="formEdit.errors.jam_mulai"
+                                                class="text-red-500 text-xs mt-1 pl-1">
+                                                {{ formEdit.errors.jam_mulai }}
+                                            </div>
+                                        </div>
+                                        <div class="group relative mb-2">
+                                            <label
+                                                class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 group-focus-within:text-[#064e88]">
+                                                Jam Selesai
+                                            </label>
+                                            <div class="flex items-center relative">
+                                                <span
+                                                    class="absolute left-0 pl-3 text-gray-400 group-focus-within:text-[#064e88]">
+                                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24" fill="currentColor">
+                                                        <path
+                                                            d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 10.59V7a1 1 0 10-2 0v6a1 1 0 00.293.707l4 4a1 1 0 001.414-1.414L13 12.59z" />
+                                                    </svg>
+                                                </span>
+                                                <input type="time" v-model="formEdit.jam_selesai"
+                                                    class="w-full bg-gray-50 border-b-2 border-gray-300 group-hover:border-[#064e88] focus:outline-none focus:ring-0 focus:border-[#064e88] px-3 py-2 pl-10 text-sm shadow-sm transition duration-300 rounded-md"
+                                                    required />
+                                            </div>
+                                            <div v-if="formEdit.errors.jam_selesai"
+                                                class="text-red-500 text-xs mt-1 pl-1">
+                                                {{ formEdit.errors.jam_selesai }}
+                                            </div>
+                                        </div>
+                                        <div class="group relative mb-2">
+                                            <label
+                                                class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 group-focus-within:text-[#064e88]">
+                                                Kauota Jadwal
+                                            </label>
+                                            <div class="flex items-center relative">
+                                                <span
+                                                    class="absolute left-0 pl-3 text-gray-400 group-focus-within:text-[#064e88]">
+                                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 20 20" fill="currentColor">
+                                                        <path d="M13 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                        <path d="M5 14a5 5 0 0110 0v1H5v-1z" />
+                                                    </svg>
+                                                </span>
+                                                <input type="number" v-model="formEdit.kuota"
+                                                    class="w-full bg-gray-50 border-b-2 border-gray-300 group-hover:border-[#064e88] focus:outline-none focus:ring-0 focus:border-[#064e88] px-3 py-2 pl-10 text-sm shadow-sm transition duration-300 rounded-md"
+                                                    required />
+                                            </div>
+                                            <div v-if="formEdit.errors.kuota" class="text-red-500 text-xs mt-1 pl-1">
+                                                {{ formEdit.errors.kuota }}
+                                            </div>
+                                        </div>
+                                        <div class="group relative mb-4">
+                                            <label
+                                                class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 group-focus-within:text-[#064e88]">
+                                                Status Jadwal
+                                            </label>
+
+                                            <label
+                                                class="flex items-center gap-3 bg-gray-50 border border-gray-300 rounded-md px-4 py-3 cursor-pointer transition hover:border-[#064e88] focus-within:border-[#064e88]">
+                                                <input type="checkbox" v-model="formEdit.aktif" :true-value="1"
+                                                    :false-value="0"
+                                                    class="h-4 w-4 rounded border-gray-300 text-[#064e88] focus:ring-[#064e88]" />
+                                                <span class="text-sm text-gray-700 select-none">
+                                                    Aktifkan Jadwal
+                                                </span>
+                                            </label>
+
+                                            <div v-if="formEdit.errors.aktif" class="text-red-500 text-xs mt-1 pl-1">
+                                                {{ formEdit.errors.aktif }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-xl">
+                                <button type="submit"
+                                    class="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-[#064e88] text-base font-medium text-white hover:bg-[#053c66] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#064e88] sm:ml-3 sm:w-auto sm:text-sm transition duration-150">
+                                    Simpan
+                                </button>
+                                <button type="button"
+                                    class="mt-3 w-full inline-flex justify-center rounded-lg border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#064e88] sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm transition duration-150"
+                                    @click="isOpenEdit = false">
+                                    Batal
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </transition>
 </template>
 
 <script setup>
@@ -396,6 +612,16 @@ const form = useForm({
     jam_selesai: "",
     kuota: "",
     aktif: "",
+});
+
+/* --- FORM EDIT --- */
+const formEdit = useForm({
+    dokter_id: "",
+    hari: "",
+    jam_mulai: "",
+    jam_selesai: "",
+    kuota: "",
+    aktif: 0,
 });
 
 /* --- STATE MODAL & PREVIEW --- */
@@ -437,6 +663,19 @@ function close() {
     message.value = null;
 }
 
+/* --- MODAL EDIT --- */
+function openEditModal(jadwalDokters) {
+    // buka modal edit
+    isOpenEdit.value = true;
+    formEdit.dokter_id = jadwalDokters.dokter_id;
+    formEdit.hari = jadwalDokters.hari;
+    formEdit.jam_mulai = jadwalDokters.jam_mulai;
+    formEdit.jam_selesai = jadwalDokters.jam_selesai;
+    formEdit.kuota = jadwalDokters.kuota;
+    formEdit.aktif = Number(jadwalDokters.aktif);
+    currentId.value = jadwalDokters.id;
+}
+
 function closeModal() {
     isOpen.value = false;
     isOpenEdit.value = false;
@@ -452,6 +691,14 @@ function submit() {
         forceFormData: true,
         onSuccess: () => closeModal(),
     });
+}
+function submitUpdate() {
+    formEdit
+        .transform((d) => ({ ...d, _method: "PUT" }))
+        .post(`/dokter/jadwal/update/${currentId.value}`, {
+            forceFormData: true,
+            onSuccess: () => closeModal(),
+        });
 }
 
 /* --- ESCAPE KEY CLOSE MODAL --- */

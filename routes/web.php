@@ -47,3 +47,4 @@ Route::delete('/dokter/poli/delete/{poli}', [PoliController::class, 'destroy'])-
 
 Route::get('/dokter/jadwal', [JadwalDokterController::class, 'index'])->name('jadwal.home');
 Route::post('/dokter/jadwal/store', [JadwalDokterController::class, 'store'])->name('jadwal.store');
+Route::put('/dokter/jadwal/update/{jadwaldokter}', [JadwalDokterController::class, 'update'])->name('jadwal.update');

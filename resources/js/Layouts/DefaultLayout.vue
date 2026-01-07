@@ -70,7 +70,7 @@
                         <div class="p-2">
                             <Link :href="$route('jadwal.home')"
                                 class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#064e88] hover:text-white transition border-b border-[#064e88]">
-                            <UserGroupIcon class="w-5 h-5" />
+                            <CalendarDaysIcon class="w-5 h-5" />
                             <span>Jadwal Dokter</span>
                             </Link>
                         </div>
@@ -239,6 +239,7 @@ import {
     UserIcon,
     ClipboardDocumentListIcon,
     BuildingOffice2Icon,
+    CalendarDaysIcon,
 } from "@heroicons/vue/24/outline";
 import { Link } from "@inertiajs/vue3";
 
