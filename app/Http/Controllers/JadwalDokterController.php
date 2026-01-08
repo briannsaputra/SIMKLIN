@@ -74,4 +74,13 @@ class JadwalDokterController extends Controller
 
         return back()->with('success', 'Jadwal dokter berhasil diperbarui.');
     }
+
+    public function destroy(JadwalDokter $jadwalDokter)
+    {
+        $jadwalDokter->delete();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Data Jadwal Dokter berhasil dihapus.');
+    }
 }

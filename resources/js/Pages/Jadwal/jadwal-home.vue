@@ -598,6 +598,25 @@
             </div>
         </div>
     </transition>
+    <div v-if="isDeleteOpen" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-sm shadow-lg">
+            <h2 class="text-lg font-semibold">Konfirmasi Hapus</h2>
+            <p class="mt-2 text-sm text-gray-600">
+                Apakah Anda yakin ingin menghapus Jadwal Dokter
+                <strong>{{ selectedItem.dokter.nama_dokter }}</strong>?
+            </p>
+
+            <div class="flex justify-end mt-6 gap-3">
+                <button type="button" @click="isDeleteOpen = false" class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 text-sm">
+                    Batal
+                </button>
+
+                <button type="button" @click="deleteData" class="px-4 py-2 rounded bg-red-600 hover:bg-red-700 text-white text-sm">
+                    Hapus
+                </button>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -623,13 +642,6 @@ const formEdit = useForm({
     kuota: "",
     aktif: 0,
 });
-
-/* --- STATE MODAL & PREVIEW --- */
-const currentId = ref(null);
-const isOpen = ref(false);
-const isOpenEdit = ref(false);
-const isDeleteOpen = ref(false);
-const selectedItem = ref({});
 
 /* --- ALERT & FLASH --- */
 const message = ref(null);
@@ -685,6 +697,18 @@ function closeModal() {
     formEdit.clearErrors();
 }
 
+function openDeleteModal(item) {
+    selectedItem.value = item;
+    isDeleteOpen.value = true;
+}
+
+/* --- STATE MODAL & PREVIEW --- */
+const currentId = ref(null);
+const isOpen = ref(false);
+const isOpenEdit = ref(false);
+const isDeleteOpen = ref(false);
+const selectedItem = ref({});
+
 /* --- CRUD --- */
 function submit() {
     form.post("/dokter/jadwal/store", {
@@ -692,6 +716,7 @@ function submit() {
         onSuccess: () => closeModal(),
     });
 }
+
 function submitUpdate() {
     formEdit
         .transform((d) => ({ ...d, _method: "PUT" }))
@@ -700,6 +725,16 @@ function submitUpdate() {
             onSuccess: () => closeModal(),
         });
 }
+
+function deleteData() {
+    form.delete(route("jadwaldokter.destroy", selectedItem.value.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+            isDeleteOpen.value = false;
+        },
+    });
+}
+
 
 /* --- ESCAPE KEY CLOSE MODAL --- */
 const closeOnEscape = (e) => {
