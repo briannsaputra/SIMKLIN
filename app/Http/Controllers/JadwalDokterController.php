@@ -83,4 +83,16 @@ class JadwalDokterController extends Controller
             ->back()
             ->with('success', 'Data Jadwal Dokter berhasil dihapus.');
     }
+
+    public function show(JadwalDokter $jadwalDokter)
+    {
+        $jadwalDokter->load([
+            'dokter:id,nama_dokter,image,poli_id',
+            'dokter.poli:id,nama_poli'
+        ]);
+
+        return Inertia::render('Jadwal/jadwal-detail', [
+            'jadwalDokter' => $jadwalDokter,
+        ]);
+    }
 }

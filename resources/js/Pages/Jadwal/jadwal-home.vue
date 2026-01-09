@@ -131,7 +131,7 @@
                                                 Hapus
                                             </button>
 
-                                            <!-- <Link :href="$route('kunjungan.show', item.id)"
+                                            <Link :href="$route('jadwal.show', item.id)"
                                                 class="inline-flex items-center px-2 py-1 border border-transparent text-xs font-semibold rounded-full shadow-sm text-gray-800 bg-gray-200 hover:bg-gray-300 hover:shadow-md transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                             <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -139,7 +139,7 @@
                                                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                             Detail
-                                            </Link> -->
+                                            </Link>
                                         </div>
                                     </td>
                                 </tr>
@@ -622,6 +622,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watchEffect } from "vue";
 import { usePage, useForm } from "@inertiajs/vue3";
+import { Link } from '@inertiajs/vue3';
 
 /* --- FORM TAMBAH --- */
 const form = useForm({

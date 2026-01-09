@@ -49,3 +49,4 @@ Route::get('/dokter/jadwal', [JadwalDokterController::class, 'index'])->name('ja
 Route::post('/dokter/jadwal/store', [JadwalDokterController::class, 'store'])->name('jadwal.store');
 Route::put('/dokter/jadwal/update/{jadwaldokter}', [JadwalDokterController::class, 'update'])->name('jadwal.update');
 Route::delete('/dokter/jadwal/destroy/{jadwalDokter}', [JadwalDokterController::class, 'destroy'])->name('jadwaldokter.destroy');
+Route::get('/dokter/jadwal/show/{jadwalDokter}', [JadwalDokterController::class, 'show'])->name('jadwal.show');
