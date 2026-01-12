@@ -39,14 +39,14 @@
             <div class="hidden md:flex flex-row gap-x-10 mt-5 text-sm font-semibold">
                 <div class="relative w-fit">
                     <Link :href="$route('home')" class="relative pb-1 text-base hover:opacity-80 transition">
-                    Beranda
+                        Beranda
 
-                    <span :class="[
-                        'absolute -bottom-4 left-0 h-1 bg-white rounded transition-all duration-200',
-                        page.url === '/'
-                            ? 'w-full opacity-100'
-                            : 'w-0 opacity-0',
-                    ]"></span>
+                        <span :class="[
+                            'absolute -bottom-4 left-0 h-1 bg-white rounded transition-all duration-200',
+                            page.url === '/'
+                                ? 'w-full opacity-100'
+                                : 'w-0 opacity-0',
+                        ]"></span>
                     </Link>
                 </div>
                 <div class="relative group w-fit">
@@ -63,22 +63,22 @@
                         <div class="p-2">
                             <Link :href="$route('dokter.home')"
                                 class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#064e88] hover:text-white transition border-b border-[#064e88]">
-                            <UserGroupIcon class="w-5 h-5" />
-                            <span>List Dokter</span>
+                                <UserGroupIcon class="w-5 h-5" />
+                                <span>List Dokter</span>
                             </Link>
                         </div>
                         <div class="p-2">
                             <Link :href="$route('jadwal.home')"
                                 class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#064e88] hover:text-white transition border-b border-[#064e88]">
-                            <CalendarDaysIcon class="w-5 h-5" />
-                            <span>Jadwal Dokter</span>
+                                <CalendarDaysIcon class="w-5 h-5" />
+                                <span>Jadwal Dokter</span>
                             </Link>
                         </div>
                         <div class="p-2">
                             <Link :href="$route('poli.home')"
                                 class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#064e88] hover:text-white transition border-b border-[#064e88]">
-                            <BuildingOffice2Icon class="w-5 h-5" />
-                            <span>Poli Dokter</span>
+                                <BuildingOffice2Icon class="w-5 h-5" />
+                                <span>Poli Dokter</span>
                             </Link>
                         </div>
                     </div>
@@ -103,21 +103,47 @@
                         <div class="p-2">
                             <Link :href="$route('pasien.home')"
                                 class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#064e88] hover:text-white transition border-b border-[#064e88]">
-                            <UserIcon class="w-5 h-5" />
-                            <span>Pasien</span>
+                                <UserIcon class="w-5 h-5" />
+                                <span>Pasien</span>
                             </Link>
                         </div>
                         <div class="p-2">
                             <Link :href="$route('kunjungan.home')"
                                 class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#064e88] hover:text-white transition border-b border-[#064e88]">
-                            <ClipboardDocumentListIcon class="w-5 h-5" />
-                            <span>Kunjungan Pasien</span>
+                                <ClipboardDocumentListIcon class="w-5 h-5" />
+                                <span>Kunjungan Pasien</span>
                             </Link>
                         </div>
                     </div>
                     <span :class="[
                         'absolute -bottom-4 left-0 h-1 bg-white rounded transition-all duration-200',
                         page.url.startsWith('/pendaftaran')
+                            ? 'w-full opacity-100'
+                            : 'w-0 opacity-0',
+                    ]"></span>
+                </div>
+                <div class="relative group w-fit">
+                    <button class="flex items-center gap-1 text-base hover:opacity-80 transition relative">
+                        Boking
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-4 h-4 text-gray-100 transition-transform group-hover:rotate-180" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 mt-2 w-[250px] bg-white text-[#064e88] rounded-lg shadow-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transform transition-all duration-200 origin-top invisible group-hover:visible z-50">
+                        <div class="p-2">
+                            <Link :href="$route('boking.home')"
+                                class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#064e88] hover:text-white transition border-b border-[#064e88]">
+                                <UserIcon class="w-5 h-5" />
+                                <span>Boking</span>
+                            </Link>
+                        </div>
+                    </div>
+                    <span :class="[
+                        'absolute -bottom-4 left-0 h-1 bg-white rounded transition-all duration-200',
+                        page.url.startsWith('/boking')
                             ? 'w-full opacity-100'
                             : 'w-0 opacity-0',
                     ]"></span>
@@ -136,15 +162,15 @@
                         <div class="p-2">
                             <Link :href="$route('antrian.index')"
                                 class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#064e88] hover:text-white transition border-b border-[#064e88]">
-                            <TicketIcon class="w-5 h-5" />
-                            <span>Ambil Nomor Antrian</span>
+                                <TicketIcon class="w-5 h-5" />
+                                <span>Ambil Nomor Antrian</span>
                             </Link>
                         </div>
                         <div class="p-2">
                             <Link :href="$route('admin.antrian')"
                                 class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[#064e88] hover:text-white transition border-b border-[#064e88]">
-                            <SpeakerWaveIcon class="w-5 h-5" />
-                            <span>Tampilkan Nomor Antrian</span>
+                                <SpeakerWaveIcon class="w-5 h-5" />
+                                <span>Tampilkan Nomor Antrian</span>
                             </Link>
                         </div>
                     </div>

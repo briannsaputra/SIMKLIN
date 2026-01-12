@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\AntrianController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\JadwalDokterController;
 use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\PasienController;
@@ -50,3 +51,5 @@ Route::post('/dokter/jadwal/store', [JadwalDokterController::class, 'store'])->n
 Route::put('/dokter/jadwal/update/{jadwaldokter}', [JadwalDokterController::class, 'update'])->name('jadwal.update');
 Route::delete('/dokter/jadwal/destroy/{jadwalDokter}', [JadwalDokterController::class, 'destroy'])->name('jadwaldokter.destroy');
 Route::get('/dokter/jadwal/show/{jadwalDokter}', [JadwalDokterController::class, 'show'])->name('jadwal.show');
+
+Route::get('/boking', [BookingController::class, 'index'])->name('boking.home');
