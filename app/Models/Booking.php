@@ -15,6 +15,7 @@ class Booking extends Model
     protected $fillable = [
         'nama_pemboking',
         'dokter_id',
+        'jadwal_dokter_id',
         'tanggal_booking',
         'kode_booking',
         'status',
@@ -46,5 +47,10 @@ class Booking extends Model
     public function dokter()
     {
         return $this->belongsTo(Dokter::class);
+    }
+
+    public function jadwalDokter()
+    {
+        return $this->belongsTo(JadwalDokter::class);
     }
 }
