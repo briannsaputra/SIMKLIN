@@ -53,3 +53,4 @@ Route::delete('/dokter/jadwal/destroy/{jadwalDokter}', [JadwalDokterController::
 Route::get('/dokter/jadwal/show/{jadwalDokter}', [JadwalDokterController::class, 'show'])->name('jadwal.show');
 
 Route::get('/boking', [BookingController::class, 'index'])->name('boking.home');
+Route::post('/boking/store', [BookingController::class, 'store'])->name('boking.store');
