@@ -72,4 +72,16 @@ class BookingController extends Controller
 
         return back()->with('success', 'Booking anda berhasil ditambahkan.');
     }
+
+    public function show(Booking $boking)
+    {
+        $boking->load([
+            'dokter:id,nama_dokter,image,poli_id',
+            'jadwalDokter:id,dokter_id,hari,jam_mulai,jam_selesai,kuota,aktif'
+        ]);
+
+        return Inertia::render('Booking/boking-detail', [
+            'boking' => $boking,
+        ]);
+    }
 }

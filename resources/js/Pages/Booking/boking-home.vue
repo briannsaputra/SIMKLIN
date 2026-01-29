@@ -74,10 +74,10 @@
                                 </div>
 
                                 <div class="flex items-center gap-3">
-                                    <button
+                                    <Link :href="$route('jadwal.show', item.id)"
                                         class="flex-1 lg:flex-none px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
                                         Detail
-                                    </button>
+                                    </Link>
                                     <button
                                         class="flex-1 lg:flex-none px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-lg transition-colors">
                                         Batalkan
@@ -290,7 +290,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watchEffect } from "vue";
-import { usePage, useForm } from "@inertiajs/vue3";
+import { usePage, useForm, Link } from "@inertiajs/vue3";
 import { watch } from "vue";
 
 function formatTanggal(tanggal) {

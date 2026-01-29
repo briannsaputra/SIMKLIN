@@ -131,7 +131,7 @@
                                                 Hapus
                                             </button>
 
-                                            <Link :href="$route('jadwal.show', item.id)"
+                                            <Link :href="$route('boking.show', item.id)"
                                                 class="inline-flex items-center px-2 py-1 border border-transparent text-xs font-semibold rounded-full shadow-sm text-gray-800 bg-gray-200 hover:bg-gray-300 hover:shadow-md transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                             <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
