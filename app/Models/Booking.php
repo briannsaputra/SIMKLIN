@@ -53,4 +53,9 @@ class Booking extends Model
     {
         return $this->belongsTo(JadwalDokter::class);
     }
+
+    public function pasien()
+    {
+        return $this->belongsTo(Pasien::class);
+    }
 }

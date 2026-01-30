@@ -63,7 +63,7 @@
                                                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                             </svg>
                                             <span class="text-sm font-medium">{{ formatTanggal(item.tanggal_booking)
-                                                }}</span>
+                                            }}</span>
                                         </div>
                                     </div>
                                     <div>
@@ -128,30 +128,34 @@
                             <div class="sm:flex sm:items-start">
                                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
                                     <div class="mt-2 space-y-6">
-                                        <div class="group relative mb-4">
+                                        <div class="group relative mb-2">
                                             <label
-                                                class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 transition-colors duration-200 group-focus-within:text-[#064e88]">
-                                                Nama Lengkap
+                                                class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 group-focus-within:text-[#064e88]">
+                                                Pilih Pasien
                                             </label>
-
                                             <div class="flex items-center relative">
                                                 <span
-                                                    class="absolute left-0 pl-3 text-gray-400 group-focus-within:text-[#064e88] transition-colors duration-200">
+                                                    class="absolute left-0 pl-3 text-gray-400 group-focus-within:text-[#064e88]">
                                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                                            clip-rule="evenodd" />
+                                                        fill="currentColor" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M6 2a1 1 0 00-1 1v4a5 5 0 004 4v2a5 5 0 0010 0v-1a3 3 0 10-2 0v1a3 3 0 11-6 0v-2a5 5 0 004-4V3a1 1 0 10-2 0v4a3 3 0 01-6 0V3a1 1 0 00-1-1z" />
                                                     </svg>
                                                 </span>
+                                                <select v-model="form.pasien_id"
+                                                    class="w-full bg-gray-50 border-b-2 border-gray-300 focus:border-[#064e88] px-3 py-2 pl-10 text-sm rounded-md">
+                                                    <option value="" disabled>
+                                                        Pilih Pasien
+                                                    </option>
 
-                                                <input type="text" v-model="form.nama_pemboking"
-                                                    placeholder="Masukkan nama lengkap dokter"
-                                                    class="w-full bg-gray-50 border-b-2 border-gray-300 group-hover:border-[#064e88] focus:outline-none focus:ring-0 focus:border-[#064e88] px-3 py-2 pl-10 text-sm shadow-sm transition duration-300 placeholder-gray-400 rounded-md" />
+                                                    <option v-for="pasien in pasienList" :key="pasien.id"
+                                                        :value="pasien.id">
+                                                        {{ pasien.nama }}
+                                                    </option>
+                                                </select>
                                             </div>
-                                            <div v-if="form.errors.nama_pemboking"
-                                                class="text-red-500 text-xs mt-1 pl-1">
-                                                {{ form.errors.nama_pemboking }}
+                                            <div v-if="form.errors.pasien_id" class="text-red-500 text-xs mt-1 pl-1">
+                                                {{ form.errors.pasien_id }}
                                             </div>
                                         </div>
 
@@ -208,11 +212,13 @@
 
                                                     <option v-for="jadwal in jadwalDokter" :key="jadwal.id"
                                                         :value="jadwal.id">
-                                                        Hari : {{ jadwal.hari }} . jam : {{ jadwal.jam_mulai }} - {{ jadwal.jam_selesai }}
+                                                        Hari : {{ jadwal.hari }} . jam : {{ jadwal.jam_mulai }} - {{
+                                                        jadwal.jam_selesai }}
                                                     </option>
                                                 </select>
                                             </div>
-                                            <div v-if="form.errors.jadwal_dokter_id" class="text-red-500 text-xs mt-1 pl-1">
+                                            <div v-if="form.errors.jadwal_dokter_id"
+                                                class="text-red-500 text-xs mt-1 pl-1">
                                                 {{ form.errors.jadwal_dokter_id }}
                                             </div>
                                         </div>
@@ -321,6 +327,7 @@ const jadwalDokter = computed(() => {
 /* --- FORM TAMBAH --- */
 const form = useForm({
     dokter_id: "",
+    pasien_id: "",
     jadwal_dokter_id: "",
     nama_pemboking: "",
     tanggal_booking: null,
@@ -408,4 +415,5 @@ function submit() {
 /* --- COMPUTED --- */
 const bokings = computed(() => usePage().props.bokings);
 const dokterList = computed(() => usePage().props.dokterList);
+const pasienList = computed(() => usePage().props.pasienList);
 </script>

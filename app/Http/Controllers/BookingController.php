@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Dokter;
 use App\Models\Booking;
 use App\Models\JadwalDokter;
+use App\Models\Pasien;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
@@ -30,17 +31,21 @@ class BookingController extends Controller
             ->select('id', 'nama_dokter')
             ->get();
 
+            $pasienList = Pasien::select('id','no_rm', 'nama',)->orderBy('nama')->get();
+
         return Inertia::render('Booking/boking-home', [
             'bokings' => $bokings,
             'dokterList' => $dokterList,
+            'pasienList' => $pasienList,
         ]);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_pemboking' => ['required', 'string', 'max:100'],
+            'nama_pemboking' => ['string', 'max:100'],
             'dokter_id' => ['required', 'exists:dokters,id'],
+            'pasien_id' => ['required', 'exists:pasien,id'],
             'jadwal_dokter_id' => ['required', 'exists:jadwal_dokter,id'],
             'tanggal_booking' => ['required', 'date', 'after_or_equal:today'],
             'keluhan' => ['nullable', 'string', 'max:500'],
