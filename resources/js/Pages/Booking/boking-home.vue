@@ -47,7 +47,7 @@
                                             item.dokter.nama_dokter }}
                                         </h3>
                                         <p class="text-gray-500 text-sm mt-1">Pasien: <span
-                                                class="font-medium text-gray-700">{{ item.nama_pemboking }}</span></p>
+                                                class="font-medium text-gray-700">{{ item.pasien.nama }}</span></p>
                                     </div>
                                 </div>
 
@@ -329,7 +329,6 @@ const form = useForm({
     dokter_id: "",
     pasien_id: "",
     jadwal_dokter_id: "",
-    nama_pemboking: "",
     tanggal_booking: null,
     status: "",
     keluhan: "",

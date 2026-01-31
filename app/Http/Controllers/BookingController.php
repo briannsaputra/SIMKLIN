@@ -15,7 +15,7 @@ class BookingController extends Controller
 {
     public function index()
     {
-        $bokings = Booking::with('dokter')->select('id', 'nama_pemboking', 'dokter_id', 'tanggal_booking', 'kode_booking', 'status', 'keluhan')->orderBy('nama_pemboking')->get();
+        $bokings = Booking::with(['dokter:id,nama_dokter', 'pasien:id,nama,nik'])->select('id', 'pasien_id', 'dokter_id', 'tanggal_booking', 'kode_booking', 'status', 'keluhan')->get();
 
         $dokterList = Dokter::with(['jadwal' => function ($query) {
             $query->where('aktif', true)
@@ -28,7 +28,7 @@ class BookingController extends Controller
                     'kuota'
                 );
         }])
-            ->select('id', 'nama_dokter')
+            ->select('id','nama_dokter')
             ->get();
 
             $pasienList = Pasien::select('id','no_rm', 'nama',)->orderBy('nama')->get();
@@ -43,7 +43,6 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_pemboking' => ['string', 'max:100'],
             'dokter_id' => ['required', 'exists:dokters,id'],
             'pasien_id' => ['required', 'exists:pasien,id'],
             'jadwal_dokter_id' => ['required', 'exists:jadwal_dokter,id'],
@@ -64,8 +63,8 @@ class BookingController extends Controller
             }
 
             Booking::create([
-                'nama_pemboking' => $validated['nama_pemboking'],
                 'dokter_id' => $validated['dokter_id'],
+                'pasien_id' => $validated['pasien_id'],
                 'jadwal_dokter_id' => $validated['jadwal_dokter_id'],
                 'tanggal_booking' => $validated['tanggal_booking'],
                 'kode_booking' => 'BK-' . now()->format('Ymd') . '-' . rand(1000, 9999),
