@@ -139,7 +139,8 @@
                                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
                                                         fill="currentColor" viewBox="0 0 24 24">
                                                         <path
-                                                            d="M6 2a1 1 0 00-1 1v4a5 5 0 004 4v2a5 5 0 0010 0v-1a3 3 0 10-2 0v1a3 3 0 11-6 0v-2a5 5 0 004-4V3a1 1 0 10-2 0v4a3 3 0 01-6 0V3a1 1 0 00-1-1z" />
+                                                            d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z" />
+                                                        <path d="M4 20c0-4 4-6 8-6s8 2 8 6v1H4v-1z" />
                                                     </svg>
                                                 </span>
                                                 <select v-model="form.pasien_id"
@@ -201,8 +202,9 @@
                                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
                                                         fill="currentColor" viewBox="0 0 24 24">
                                                         <path
-                                                            d="M6 2a1 1 0 00-1 1v4a5 5 0 004 4v2a5 5 0 0010 0v-1a3 3 0 10-2 0v1a3 3 0 11-6 0v-2a5 5 0 004-4V3a1 1 0 10-2 0v4a3 3 0 01-6 0V3a1 1 0 00-1-1z" />
+                                                            d="M7 2a1 1 0 011 1v1h8V3a1 1 0 112 0v1h1a2 2 0 012 2v13a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h1V3a1 1 0 011-1zm12 8H5v9h14v-9z" />
                                                     </svg>
+
                                                 </span>
                                                 <select v-model="form.jadwal_dokter_id"
                                                     class="w-full bg-gray-50 border-b-2 border-gray-300 focus:border-[#064e88] px-3 py-2 pl-10 text-sm rounded-md">
@@ -213,7 +215,7 @@
                                                     <option v-for="jadwal in jadwalDokter" :key="jadwal.id"
                                                         :value="jadwal.id">
                                                         Hari : {{ jadwal.hari }} . jam : {{ jadwal.jam_mulai }} - {{
-                                                        jadwal.jam_selesai }}
+                                                            jadwal.jam_selesai }}
                                                     </option>
                                                 </select>
                                             </div>
